@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+#@profiles.active@
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*Mapper.xml
+  map-underscore-to-camel-case: true
