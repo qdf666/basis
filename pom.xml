@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+<!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
     </parent>
     <groupId>com.peacebird</groupId>
     <artifactId>connection</artifactId>
@@ -61,7 +61,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
         <!-- mybatis-plus默然使用默认使用了Velocity 引擎现在改为freemarker 模板引擎 -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -75,11 +74,13 @@
         <profile>
             <id>dev</id>
             <properties>
+                <server.port>8081</server.port>
                 <profiles.active>dev</profiles.active>
-                <server.port>19090</server.port>
-<!--                <logging.config>dev_log4j2.xml</logging.config>-->
+                <datasource.class>com.mysql.cj.jdbc.Driver</datasource.class>
+                <datasource.username>root</datasource.username>
+                <datasource.password>123</datasource.password>
+                <datasource.url>jdbc:mysql://localhost:3306/foundation?serverTimezone=GMT</datasource.url>
             </properties>
-
             <!-- 是否默认 true表示默认 -->
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -90,27 +91,17 @@
             <id>prod</id>
             <properties>
                 <profiles.active>prod</profiles.active>
-                <server.port>19091</server.port>
-<!--                <logging.config>prod_log4j2.xml</logging.config>-->
+                <server.port>8082</server.port>
+                <datasource.url>jdbc:mysql://localhost:3306/foundation?serverTimezone=GMT</datasource.url>
+                <datasource.username>root</datasource.username>
+                <datasource.password>123</datasource.password>
+                <datasource.classname>com.mysql.cj.jdbc.Driver</datasource.classname>
             </properties>
         </profile>
     </profiles>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -128,6 +119,24 @@
             </plugin>
 
         </plugins>
+
+        <finalName>${artifactId}-${profiles.active}</finalName>
+
+        <resources>
+            <resource>
+                <!-- 此处为编译指定不同环境下的目录下配置文件 -->
+                <!-- 此处可以根据起的环境名称进行相应的修改 -->
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <!-- 以下列出的进入到打包文件中 -->
+                <includes>
+                    <include>application.yml</include>
+                    <include>application-${profiles.active}.yml</include>
+                    <include>**/*.xml</include>
+                    <include>mapper/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>
