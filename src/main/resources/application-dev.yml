@@ -1,11 +1,11 @@
 server:
-  port: @server.port@
+  port: "@server.port@"
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123
-    url: jdbc:mysql://localhost:3306/foundation?serverTimezone=GMT
+    driver-class-name: "@datasource.classname@"
+    username: "@datasource.username@"
+    password: "@datasource.password@"
+    url: "@datasource.url@"
     hikari:
       connectionTestQuery: SELECT 1 FROM DUAL
       # 连接池最大连接数

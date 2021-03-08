@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="error">
+
+    <properties>
+        <property name="LOG_HOME">F:\IdeaProjects\basis\logs\connection</property>
+        <property name="BACKUP_HOME">F:\IdeaProjects\basis\logs\connection\back</property>
+        <property name="SERVER_NAME">connection</property>
+    </properties>
+
+    <appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+            <ThresholdFilter level="error" onMatch="ACCEPT"
+                             onMismatch="DENY" />
+            <!--这个都知道是输出日志的格式 -->
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss-SSS} %level [%thread][%file:%M:%line] - %msg%xEx%n" />
+        </Console>
+        <!--这个appender设置，按日生成日志文档 -->
+        <RollingFile name="RollingFile"
+                     fileName="${LOG_HOME}/${SERVER_NAME}.log"
+                     filePattern="${LOG_HOME}/${SERVER_NAME}.%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="debug" onMatch="ACCEPT"
+                             onMismatch="DENY" />
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss-SSS} %level [%thread][%file:%M:%line] - %msg%xEx%n" />
+            <!--用于确定是否应发生滚动的策略-->
+            <Policies>
+            <!--基于时间的滚动策略，interval属性用来指定多久滚动一次，默认是1 hour。modulate=true用来调整时间：比如现在是早上3am，interval是4，那么第一次滚动是在4am，接着是8am，12am...而不是7am.生。-->
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        <!--(备份)这个appender设置，根据size大小和日期（每天），日志会自动存入按年份-月份建立的压缩文件，作为存档 -->
+        <RollingFile name="Backup"
+                     fileName="${BACKUP_HOME}/${SERVER_NAME}.log"
+                     filePattern="${BACKUP_HOME}/${SERVER_NAME}.%d{yyyy-MM-dd}-%i.log.gz">
+            <ThresholdFilter level="debug" onMatch="ACCEPT"
+                             onMismatch="DENY" />
+<!--       输出日志的格式-->
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss-SSS} %level [%thread][%file:%M:%line] - %msg%xEx%n" />
+            <Policies>
+            <!--基于指定文件大小的滚动策略。可以以字节为单位指定大小，后缀为kb、mb或gb，例如20MB。当与基于时间的触发策略组合时，文件模式必须包含一个%i，否则每次滚动时目标文件都将被覆盖，因为大小化的触发策略不会导致文件名中的时间戳值更改。在没有基于时间的触发策略的情况下使用时，SizeBase触发策略将导致时间戳值更改-->
+                <SizeBasedTriggeringPolicy size="10MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+
+    </appenders>
+    <loggers>
+        <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+        <root level="debug">
+            <appender-ref ref="Console" />
+            <appender-ref ref="Backup" />
+            <appender-ref ref="RollingFile" />
+        </root>
+
+    </loggers>
+</configuration>
