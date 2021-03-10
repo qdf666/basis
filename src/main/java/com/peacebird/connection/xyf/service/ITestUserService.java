@@ -2,6 +2,11 @@ package com.peacebird.connection.xyf.service;
 
 import com.peacebird.connection.xyf.entity.TestUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.peacebird.connection.xyf.mapper.TestUserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,6 +16,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author xyf
  * @since 2021-03-06
  */
+@Service
 public interface ITestUserService extends IService<TestUser> {
+
+    TestUser getTestUserById(int id);
+
 
 }

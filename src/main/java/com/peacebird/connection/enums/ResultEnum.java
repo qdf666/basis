@@ -12,24 +12,21 @@ import lombok.Getter;
 @Getter
 public enum ResultEnum {
 
-    SUCCESS(0, "成功"),
 
-    SYSTEM_ERROR(1, "执行失败"),
+    SUCCESS(true,0,"成功"),
 
-    PARAM_IS_NULL(2, "参数为空"),
 
-    USERCODE_IS_NULL(3, "参数 userCode 不允许为空"),
+    SYSTEM_ERROR(false,40000,"系统异常")
 
-    STORECODE_IS_NULL(4, "参数 storeCode 不允许为空"),
-
-    RESULT_IS_NULL(5, "查询结果为空");
-
+    ;
+    private boolean success;
 
     private Integer code;
 
     private String msg;
 
-    ResultEnum(Integer code, String msg) {
+    ResultEnum(boolean success, Integer code, String msg) {
+        this.success = success;
         this.code = code;
         this.msg = msg;
     }

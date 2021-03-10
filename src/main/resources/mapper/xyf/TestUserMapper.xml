@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.peacebird.connection.xyf.mapper.TestUserMapper">
 
+    <insert id="testinsert" parameterType="com.peacebird.connection.xyf.entity.TestUser">
+        insert into test_user(username, password) values (#{testUser.username}, #{testUser.password})
+    </insert>
+
+    <select id="queryById" resultType="com.peacebird.connection.xyf.entity.TestUser" parameterType="int">
+        select * from test_user where id=#{id}
+    </select>
+
 </mapper>

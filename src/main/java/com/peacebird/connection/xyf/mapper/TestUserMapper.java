@@ -3,6 +3,8 @@ package com.peacebird.connection.xyf.mapper;
 import com.peacebird.connection.xyf.entity.TestUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -14,5 +16,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TestUserMapper extends BaseMapper<TestUser> {
+
+    public TestUser queryById(int id);
+
+    public void testinsert(@Param("testUser") TestUser testUser);
 
 }

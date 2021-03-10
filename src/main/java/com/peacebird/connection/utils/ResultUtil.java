@@ -27,17 +27,27 @@ public class ResultUtil {
         return result;
     }
 
+    public static Result cussuccess(Integer code, Object object) {
+        Result result = new Result();
+        result.setCode(code);
+        result.setMsg("success");
+        result.setData(object);
+        return result;
+    }
+
     public static Result error(ResultEnum resultEnum) {
         Result result = new Result();
         result.setCode(resultEnum.getCode());
         result.setMsg(resultEnum.getMsg());
+        result.setData(resultEnum.getMsg());
         return result;
     }
 
-    public static Result error(Integer code, String msg) {
+    public static Result error(Integer code, String msg, boolean issuccess) {
         Result result = new Result();
         result.setCode(code);
         result.setMsg(msg);
+        result.setData(issuccess);
         return result;
     }
 

@@ -103,7 +103,7 @@
                 <profiles.active>dev</profiles.active>
                 <datasource.classname>com.mysql.cj.jdbc.Driver</datasource.classname>
                 <datasource.username>root</datasource.username>
-                <datasource.password>123</datasource.password>
+                <datasource.password>asd042838xyf</datasource.password>
                 <datasource.url>jdbc:mysql://localhost:3306/foundation?serverTimezone=GMT</datasource.url>
             </properties>
             <!-- 是否默认 true表示默认 -->

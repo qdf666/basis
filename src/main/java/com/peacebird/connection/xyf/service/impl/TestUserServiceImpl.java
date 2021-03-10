@@ -4,6 +4,7 @@ import com.peacebird.connection.xyf.entity.TestUser;
 import com.peacebird.connection.xyf.mapper.TestUserMapper;
 import com.peacebird.connection.xyf.service.ITestUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestUserServiceImpl extends ServiceImpl<TestUserMapper, TestUser> implements ITestUserService {
 
+    @Autowired
+    TestUserMapper testUserMapper;
+
+    @Override
+    public TestUser getTestUserById(int id) {
+        TestUser testUser = testUserMapper.queryById(id);
+        return testUser;
+    }
 }

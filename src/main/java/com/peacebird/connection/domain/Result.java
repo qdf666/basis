@@ -1,6 +1,8 @@
 package com.peacebird.connection.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Package: com.peacebird.connection.domain
@@ -10,6 +12,8 @@ import lombok.Data;
  * @Description: todo
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Result<T> {
 
     private Integer code;
