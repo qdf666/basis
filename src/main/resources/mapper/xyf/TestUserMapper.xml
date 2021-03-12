@@ -5,9 +5,17 @@
     <insert id="testinsert" parameterType="com.peacebird.connection.xyf.entity.TestUser">
         insert into test_user(username, password) values (#{testUser.username}, #{testUser.password})
     </insert>
+<!--    调用存储过程，默认是PREPARED-->
+    <insert id="testcall" parameterType="com.peacebird.connection.xyf.entity.Call" statementType="CALLABLE">
+        {call ttt(#{username, mode=IN, jdbcType=VARCHAR},
+                  #{password, mode=IN, jdbcType=VARCHAR},
+                  #{out_id, mode=OUT, jdbcType=INTEGER})}
+    </insert>
 
     <select id="queryById" resultType="com.peacebird.connection.xyf.entity.TestUser" parameterType="int">
         select * from test_user where id=#{id}
     </select>
+
+
 
 </mapper>

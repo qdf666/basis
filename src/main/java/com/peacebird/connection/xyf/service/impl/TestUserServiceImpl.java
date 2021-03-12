@@ -1,5 +1,6 @@
 package com.peacebird.connection.xyf.service.impl;
 
+import com.peacebird.connection.xyf.entity.Call;
 import com.peacebird.connection.xyf.entity.TestUser;
 import com.peacebird.connection.xyf.mapper.TestUserMapper;
 import com.peacebird.connection.xyf.service.ITestUserService;
@@ -23,7 +24,19 @@ public class TestUserServiceImpl extends ServiceImpl<TestUserMapper, TestUser> i
 
     @Override
     public TestUser getTestUserById(int id) {
-        TestUser testUser = testUserMapper.queryById(id);
-        return testUser;
+        return  testUserMapper.queryById(id);
+
+    }
+
+    /**
+    * @Description:
+    * @Param:
+    * @return:
+    * @Author: xyf
+    * @Date: 2021/3/11
+    */
+    @Override
+    public int getTestCallID(Call call) {
+        return testUserMapper.testcall(call);
     }
 }

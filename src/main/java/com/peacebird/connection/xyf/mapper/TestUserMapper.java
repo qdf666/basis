@@ -1,5 +1,6 @@
 package com.peacebird.connection.xyf.mapper;
 
+import com.peacebird.connection.xyf.entity.Call;
 import com.peacebird.connection.xyf.entity.TestUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,5 +21,7 @@ public interface TestUserMapper extends BaseMapper<TestUser> {
     public TestUser queryById(int id);
 
     public void testinsert(@Param("testUser") TestUser testUser);
+
+    public int testcall(Call call);
 
 }
