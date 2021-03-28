@@ -92,7 +92,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
     </dependencies>
+
 
     <profiles>
         <!-- 开发环境 打包命令mvn clean package -Pdev或mvn clean package -D profiles.active=dev -->
@@ -119,7 +131,7 @@
                 <server.port>8082</server.port>
                 <datasource.classname>com.mysql.cj.jdbc.Driver</datasource.classname>
                 <datasource.username>root</datasource.username>
-                <datasource.password>123</datasource.password>
+                <datasource.password>asd042838xyf</datasource.password>
                 <datasource.url>jdbc:mysql://localhost:3306/foundation?serverTimezone=GMT</datasource.url>
             </properties>
         </profile>
